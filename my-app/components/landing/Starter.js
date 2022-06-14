@@ -38,26 +38,26 @@ export default function Starter() {
           className="relative flex flex-col items-center
                           laptop:items-start "
         >
-          <h5>Don&apos;t Code Alone</h5>
-          <h1 className="mb-1">Code With A Community.</h1>
-          <h4 className="mb-1 text">Building Asia&apos;s Most Collaborative</h4>
+          <h5>Don&apos;t buy tickets</h5>
+          <h1 className="mb-1">Buy NFT</h1>
+          <h4 className="mb-1 text">NFT as a ticketing service</h4>
           <h4 className="relative flex flex-row mb-3 ">
-            Community Of Students
+            Community Of Developers
             <p className="h-8 w-8 ml-2">
               <Image src={rocket} alt="image" />
             </p>
           </h4>
-          <p
+          {/* <p
             className="relative sub-heading-1 mb-6 text-center max-w-[50%]
                           laptop:mb-11 laptop:text-left laptop:max-w-[75%]"
           >
             CodeAsia is a non-profit of students who encourage each other to do
             the best as makers & coders.
-          </p>
+          </p> */}
         </div>
         <motion.button className="primary" whileHover={{ y: -2 }} whileTap={{ y: 0 }}>
           
-            Join community&nbsp;
+            Connect Wallet&nbsp;
             <Image width={20} height={20} src={party} alt="image" />
         
         </motion.button>

@@ -2,13 +2,48 @@ import logo from "../public/img/Vector.svg";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Web3Modal from 'web3modal'
+import {ethers} from 'ethers'
+
+let web3modal;
+if(typeof(window)!=="undefined"){
+  web3modal = new Web3Modal({
+    network: "goerli",
+    providerOptions: {},
+    disableInjectedProvider: false
+  })
+}
 
 function Navbar(props) {
   const [hideNav, setHideNav] = useState(true);
   const [screenWidth, setScreenWidth] = useState();
+  const [walletConnected,setWalletConnected] = useState(false)
+
   const openNav = () => {
     setHideNav(!hideNav);
   };
+
+  const connectWallet = async (needSigner = false) => {
+    try{
+      const instance = await web3modal.connect()
+      const provider = new ethers.providers.Web3Provider(instance)
+      const {chainId} = await provider.getNetwork()
+      if(chainId !== 5 ){
+        window.alert("connect with goerli network")
+        throw new Error("inncorrect network")
+      }
+      if(needSigner){
+        const signer = provider.getSigner()
+        setWalletConnected(true)
+        return signer
+      }
+      setWalletConnected(true)
+      return provider
+    }
+    catch(error){
+      console.log(error)
+    }
+  }
 
   useEffect(() => {
     if (window) {
@@ -31,9 +66,6 @@ function Navbar(props) {
       <div className="flex mr-auto py-2 pl-6">
         <Link href="/">
           <a className="flex mr-auto hover:bg-[#dbd5d533] ease-in transition duration-700 px-2 py-1 border-0 rounded-xl">
-            {/* <div className="h-9 w-9 mr-2.5">
-                <Image src={logo} layout="responsive" alt="image" />
-              </div> */}
             <div className="font-inter font-semibold text-[26px] text-white">
               TickDock
             </div>
@@ -52,9 +84,8 @@ function Navbar(props) {
         <a className="nav-link">Your Tickets</a>
         </Link>
       </div>
-      {/* </div> */}
       <div className="items-end">
-        <button className="tetiary-1">Connect Wallet</button>
+        {walletConnected ? (<button className="tetiary-1" >Connected</button>) : (<button className="tetiary-1" onClick={connectWallet} >Connect Wallet</button>)}
       </div>
     </header>
   );

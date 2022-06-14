@@ -1,8 +1,21 @@
 import Image from "next/image";
 import emailTop from "../../public/img/contact/emailTop.svg";
 import emailBig from "../../public/img/contact/emailBig.svg";
+import {ethers,Contract} from 'ethers'
+import {TickDock_Contract_Address,TickDock_ABI} from '../../utils/index'
+
 
 export default function Contact(props){
+  const createEvent = async() => {
+    try {
+      //const signer = await connectWallet(true)
+      //const TickDockContract = new Contract(TickDock_Contract_Address,TickDock_ABI,signer)
+      //const txn = await TickDockContract.addEvent()
+      //await txn.wait()
+    } catch (error) {
+      console.log(error)
+    }
+  }
     return (
       <div className="flex items-center justify-center">
         <div
@@ -13,15 +26,6 @@ export default function Contact(props){
             <Image src={emailTop} alt="image" />
           </div>
           <div className="laptop:oder-2">
-            {/* <div className="text-center mb-6 mt-8">
-              <h1 className="m-auto text-left">
-                Our Team is Here to Help! <span className="text-black">💬</span>
-              </h1>
-              <p className="sub-heading-2 m-auto font-normal laptop:text-left text-center">
-                You can reach out to us for any feedback or suggestion. We will
-                always be ready to help.
-              </p>
-            </div> */}
             <form action="https://formspree.io/f/xknyqeza" method="POST">
               <div className="laptop:grid laptop:grid-cols-1">
                 <div className="mt-4">

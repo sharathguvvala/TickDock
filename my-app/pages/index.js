@@ -14,8 +14,8 @@ export default function Home() {
       <div className="relative screen-w max-w-screen-2xl px-6 laptop:px-24 m-auto">
   
         <Starter />
-        <Card />
-        <Card1 />
+        {/* <Card />
+        <Card1 /> */}
   
   </div>
     </>
