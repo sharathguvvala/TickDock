@@ -55,11 +55,11 @@ export default function Starter() {
             the best as makers & coders.
           </p>
         </div>
-        <motion.button whileHover={{ y: -2 }} whileTap={{ y: 0 }}>
-          <button className="primary">
+        <motion.button className="primary" whileHover={{ y: -2 }} whileTap={{ y: 0 }}>
+          
             Join community&nbsp;
             <Image width={20} height={20} src={party} alt="image" />
-          </button>
+        
         </motion.button>
       </div>
     </div>
