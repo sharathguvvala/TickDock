@@ -10,6 +10,7 @@ import pin from "../public/img/emoji/pushpin.svg";
 import { useEffect, useState } from "react";
 
 function Events(props) {
+
   useEffect(() => {
     document.querySelector("body").classList.add("events");
   });

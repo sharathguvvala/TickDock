@@ -18,6 +18,7 @@ function Navbar(props) {
   const [hideNav, setHideNav] = useState(true);
   const [screenWidth, setScreenWidth] = useState();
   const [walletConnected,setWalletConnected] = useState(false)
+  const [currentAddress,setCurrentAddress] = useState()
 
   const openNav = () => {
     setHideNav(!hideNav);
@@ -35,8 +36,11 @@ function Navbar(props) {
       if(needSigner){
         const signer = provider.getSigner()
         setWalletConnected(true)
+        setCurrentAddress(signer.getAddress())
         return signer
       }
+      const signer = provider.getSigner()
+      setCurrentAddress(signer.getAddress())
       setWalletConnected(true)
       return provider
     }
@@ -61,6 +65,19 @@ function Navbar(props) {
     });
   }, []);
 
+  function walletButton()  {
+    if(!walletConnected){
+      return(
+        <button className="tetiary-1" onClick={connectWallet} >Connect Wallet</button>
+      )
+    }
+    if(walletConnected){
+      return(
+        <button className="tetiary-1" >Connected</button>
+      )
+    }
+  }
+
   return (
     <header className="flex flex-wrap justify-center items-center sticky top-0 bg-transparent backdrop-blur-lg z-[99] transition duration-200 py-0.5 px-16">
       <div className="flex mr-auto py-2 pl-6">
@@ -83,9 +100,12 @@ function Navbar(props) {
         <Link href="/ticket">
         <a className="nav-link">Your Tickets</a>
         </Link>
+        <Link href="/ticket">
+        <a className="nav-link">Your Events</a>
+        </Link>
       </div>
       <div className="items-end">
-        {walletConnected ? (<button className="tetiary-1" >Connected</button>) : (<button className="tetiary-1" onClick={connectWallet} >Connect Wallet</button>)}
+        {walletButton()}
       </div>
     </header>
   );
